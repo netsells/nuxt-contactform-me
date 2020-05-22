@@ -14,6 +14,12 @@ class ContactFormMeController {
      * @returns {Promise<any>}
      */
     async submit({ request, response }) {
+        if (!process.env.CONTACTFORM_ME_KEY) {
+            return response.status(500).json({
+                message: 'Form key not provided.',
+            });
+        }
+
         const data = request.all();
 
         try {
