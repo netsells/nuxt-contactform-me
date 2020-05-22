@@ -1,0 +1,27 @@
+{
+    "name": "@netsells/nuxt-contactform-me",
+    "description": "Nuxt integration for Contactform.me",
+    "version": "0.1.0",
+    "main": "lib/index.js",
+    "license": "MIT",
+    "repository": {
+        "url": "https://github.com/netsells/nuxt-contactform-me"
+    },
+    "author": {
+        "name": "Sam Turrell",
+        "url": "https://samturrell.co.uk",
+        "email": "sam.turrell@netsells.co.uk"
+    },
+    "dependencies": {
+        "axios": "^0.19.2",
+        "qs": "^6.9.4"
+    },
+    "devDependencies": {
+        "@netsells/eslint-config": "^3.10.0",
+        "babel-eslint": "^10.1.0"
+    },
+    "files": [
+        "lib/**/*",
+        "adonis/**/*"
+    ]
+}
