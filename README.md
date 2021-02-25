@@ -43,6 +43,21 @@ There are two options available to configure in your application:
 
 You will want to change this if you're not using the adonis integration (see below) or your form api is hosted off site.
 
+### Runtime Config
+
+The above options can also be defined as runtime config variables, like so:
+
+```js
+module.exports = {
+    publicRuntimeConfig: {
+        contactformMe: {
+            form_identifier: process.env.CFME_FORM_IDENTIFIER,
+            submit_endpoint: `${ process.env.APP_URL }/api/contact-form`,
+        },
+    },
+};
+```
+
 ## Usage
 
 Once the module is installed it will register a global `$cfme` object. This object has a single method `submit`. When called will return an axios promise.
@@ -63,30 +78,33 @@ This method accepts the following arguments:
 - Type: `string`
 
 ```js
-methods: {
-    async handleSubmit() {
-        await this.$cfme.submit({
-            email: this.formData.email,
-            name: this.formData.name,
-        });
-        // Handle success
+export default {
+    methods: {
+        async handleSubmit() {
+            await this.$cfme.submit({
+                email: this.formData.email,
+                name: this.formData.name,
+            });
+            // Handle success
+        },
     },
-},
+};
 ```
-
 
 If your application has multiple forms you can provide the second `formIdentifier` argument:
 
 ```js
-methods: {
-    async handleSubmit() {
-        await this.$cfme.submit({
-            email: this.formData.email,
-            name: this.formData.name,
-        }, 'application_form');
-        // Handle success
+export default {
+    methods: {
+        async handleSubmit() {
+            await this.$cfme.submit({
+                email: this.formData.email,
+                name: this.formData.name,
+            }, 'application_form');
+            // Handle success
+        },
     },
-},
+};
 ```
 
 ## Submit endpoint
@@ -115,11 +133,13 @@ const providers = [
 Ensure the provided api endpoint is in your CSRF exclusions in `config/shield.js`:
 
 ```js
-csrf: {
-    filterUris: [
-        '/api/contact-form',
-    ],
-},
+module.exports = {
+    csrf: {
+        filterUris: [
+            '/api/contact-form',
+        ],
+    },
+};
 ```
 
 Set the key for your Contactform.me form in your applications `.env` file:
